@@ -32,6 +32,9 @@ config.outbounds.map(i => {
   if (['sg', 'sg-auto'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:us)).*(新|sg|singapore|🇸🇬)/i))
   }
+  if (['kr', 'kr-auto'].includes(i.tag)) {
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:kr)).*(KR|Korea|KOR|首尔|韩|韓|🇰🇷)/i))
+  }
   if (['us', 'us-auto'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
   }

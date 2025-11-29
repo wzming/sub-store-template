@@ -12,6 +12,7 @@ let proxies = await produceArtifact({
   platform: 'sing-box',
   produceType: 'internal',
 })
+console.log("文件信息\/r\/n",config)
 
 config.outbounds.push(...proxies)
 

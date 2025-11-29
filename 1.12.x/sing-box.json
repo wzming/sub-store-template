@@ -36,6 +36,10 @@
         "server": "ali"
       },
       {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
         "query_type": [
           "A",
           "AAAA"
@@ -97,17 +101,14 @@
         "outbound": "bilibili"
       },
       {
-        "rule_set": [
-          "netflix_ip",
-          "netflix_domain"
-        ],
+        "rule_set": "spotify_domain",
         "action": "route",
-        "outbound": "netflix"
+        "outbound": "spotify"
       },
       {
-        "rule_set": "bahamut_domain",
+        "rule_set": "amazon_domain",
         "action": "route",
-        "outbound": "bahamut"
+        "outbound": "amazon"
       },
       {
         "rule_set": "youtube_domain",
@@ -133,7 +134,7 @@
               "apple_domain",
               "google_domain",
               "telegram_domain",
-              "netflix_domain"
+              "spotify_domain"
             ]
           }
         ],
@@ -192,10 +193,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "bahamut_domain",
+        "tag": "amazon_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bahamut.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
         "download_detour": "direct"
       },
       {
@@ -234,17 +235,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "netflix_ip",
+        "tag": "spotify_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "netflix_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/netflix.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
         "download_detour": "direct"
       },
       {
@@ -392,7 +386,7 @@
       "default": "direct"
     },
     {
-      "tag": "netflix",
+      "tag": "spotify",
       "type": "selector",
       "outbounds": [
         "proxy",
@@ -413,7 +407,7 @@
       "default": "proxy"
     },
     {
-      "tag": "bahamut",
+      "tag": "amazon",
       "type": "selector",
       "outbounds": [
         "proxy",

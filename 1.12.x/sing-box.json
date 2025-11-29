@@ -31,8 +31,9 @@
         "server": "fakeip"
       },
       {
-        "query_type": "HTTPS",
-        "action": "reject"
+        "rule_set": "cn_domain",
+        "action": "route",
+        "server": "ali"
       },
       {
         "query_type": [
@@ -42,11 +43,6 @@
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
-      },
-      {
-        "rule_set": "cn_domain",
-        "action": "route",
-        "server": "ali"
       }
     ],
     "final": "google",
@@ -65,7 +61,7 @@
           "quic",
           "dns"
         ],
-        "timeout": "500ms"
+        "timeout": "300ms"
       },
       {
         "type": "logical",

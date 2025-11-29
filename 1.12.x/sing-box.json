@@ -96,11 +96,6 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "bilibili_domain",
-        "action": "route",
-        "outbound": "bilibili"
-      },
-      {
         "rule_set": "spotify_domain",
         "action": "route",
         "outbound": "spotify"
@@ -131,10 +126,12 @@
             "invert": true,
             "rule_set": [
               "cn_domain",
-              "apple_domain",
               "google_domain",
               "telegram_domain",
-              "spotify_domain"
+              "spotify_domain",
+              "youtube_domain",
+              "openai_domain",
+              "amazon_domain"
             ]
           }
         ],
@@ -162,14 +159,6 @@
       },
       {
         "rule_set": [
-          "apple_ip",
-          "apple_domain"
-        ],
-        "action": "route",
-        "outbound": "apple"
-      },
-      {
-        "rule_set": [
           "cn_ip",
           "cn_domain"
         ],
@@ -179,31 +168,10 @@
     ],
     "rule_set": [
       {
-        "tag": "apple_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "apple_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "amazon_domain",
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bilibili_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bilibili.srs",
         "download_detour": "direct"
       },
       {
@@ -323,27 +291,6 @@
       "default": "proxy"
     },
     {
-      "tag": "apple",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
-    },
-    {
       "tag": "telegram",
       "type": "selector",
       "outbounds": [
@@ -363,27 +310,6 @@
         "all-auto"
       ],
       "default": "proxy"
-    },
-    {
-      "tag": "bilibili",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
     },
     {
       "tag": "spotify",

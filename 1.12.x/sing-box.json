@@ -256,7 +256,8 @@
         "direct"
       ],
       "default": "direct"
-    },{
+    },
+    {
       "tag": "proxy",
       "type": "selector",
       "outbounds": [

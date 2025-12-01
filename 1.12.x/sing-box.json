@@ -250,6 +250,13 @@
   },
   "outbounds": [
     {
+      "tag": "fiddler",
+      "type": "selector",
+      "outbounds": [
+        "direct"
+      ],
+      "default": "direct"
+    },{
       "tag": "proxy",
       "type": "selector",
       "outbounds": [

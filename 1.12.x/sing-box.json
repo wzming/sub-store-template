@@ -2,15 +2,23 @@
   "dns": {
     "servers": [
       {
+        "tag": "bootstrap",
+        "type": "udp",
+        "server": "1.1.1.1",
+        "server_port": 53
+      },
+      {
         "tag": "google",
         "type": "https",
         "server": "https://dns.google/dns-query",
+        "domain_resolver": "bootstrap",
         "detour": "proxy"
       },
       {
         "tag": "ali",
         "type": "https",
-        "server": "https://dns.alidns.com/dns-query"
+        "server": "https://dns.alidns.com/dns-query",
+        "domain_resolver": "bootstrap"
       },
       {
         "tag": "fakeip",

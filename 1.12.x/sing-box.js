@@ -39,6 +39,7 @@ config.outbounds.map(i => {
     i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
   }
   if (['fiddler'].includes(i.tag)) {
+    console.log(JSON.stringify(i))
     i.outbounds.push(...getTags(proxies, /fiddler/i))
   }
 })

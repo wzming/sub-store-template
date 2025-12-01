@@ -4,13 +4,13 @@
       {
         "tag": "google",
         "type": "https",
-        "server": "8.8.8.8",
+        "server": "https://dns.google/dns-query",
         "detour": "proxy"
       },
       {
         "tag": "ali",
         "type": "https",
-        "server": "223.5.5.5"
+        "server": "https://dns.alidns.com/dns-query"
       },
       {
         "tag": "fakeip",
@@ -20,6 +20,10 @@
       }
     ],
     "rules": [
+      {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
       {
         "clash_mode": "Direct",
         "action": "route",
@@ -34,10 +38,6 @@
         "rule_set": "cn_domain",
         "action": "route",
         "server": "ali"
-      },
-      {
-        "query_type": "HTTPS",
-        "action": "reject"
       },
       {
         "query_type": [
@@ -65,7 +65,7 @@
           "quic",
           "dns"
         ],
-        "timeout": "300ms"
+        "timeout": "500ms"
       },
       {
         "type": "logical",
@@ -611,7 +611,7 @@
   },
   "log": {
     "disabled": false,
-    "level": "info",
+    "level": "warn",
     "timestamp": true
   }
 }

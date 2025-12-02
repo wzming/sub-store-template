@@ -560,6 +560,7 @@
       "outbounds": [
         "direct",
         "proxy",
+        "fiddler",
         "hk",
         "hk-auto",
         "tw",

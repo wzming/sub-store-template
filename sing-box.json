@@ -3,13 +3,13 @@
     "servers": [
       {
         "tag": "google",
-        "type": "https",
+        "type": "tls",
         "server": "8.8.8.8",
         "detour": "proxy"
       },
       {
         "tag": "ali",
-        "type": "https",
+        "type": "udp",
         "server": "223.5.5.5"
       },
       {
@@ -21,6 +21,10 @@
     ],
     "rules": [
       {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
         "clash_mode": "Direct",
         "action": "route",
         "server": "ali"
@@ -31,8 +35,9 @@
         "server": "fakeip"
       },
       {
-        "query_type": "HTTPS",
-        "action": "reject"
+        "rule_set": "cn_domain",
+        "action": "route",
+        "server": "ali"
       },
       {
         "query_type": [
@@ -42,11 +47,6 @@
         "action": "route",
         "server": "fakeip",
         "rewrite_ttl": 1
-      },
-      {
-        "rule_set": "cn_domain",
-        "action": "route",
-        "server": "ali"
       }
     ],
     "final": "google",
@@ -96,22 +96,14 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "bilibili_domain",
+        "rule_set": "spotify_domain",
         "action": "route",
-        "outbound": "bilibili"
+        "outbound": "spotify"
       },
       {
-        "rule_set": [
-          "netflix_ip",
-          "netflix_domain"
-        ],
+        "rule_set": "amazon_domain",
         "action": "route",
-        "outbound": "netflix"
-      },
-      {
-        "rule_set": "bahamut_domain",
-        "action": "route",
-        "outbound": "bahamut"
+        "outbound": "amazon"
       },
       {
         "rule_set": "youtube_domain",
@@ -134,10 +126,12 @@
             "invert": true,
             "rule_set": [
               "cn_domain",
-              "apple_domain",
               "google_domain",
               "telegram_domain",
-              "netflix_domain"
+              "spotify_domain",
+              "youtube_domain",
+              "openai_domain",
+              "amazon_domain"
             ]
           }
         ],
@@ -165,14 +159,6 @@
       },
       {
         "rule_set": [
-          "apple_ip",
-          "apple_domain"
-        ],
-        "action": "route",
-        "outbound": "apple"
-      },
-      {
-        "rule_set": [
           "cn_ip",
           "cn_domain"
         ],
@@ -182,31 +168,10 @@
     ],
     "rule_set": [
       {
-        "tag": "apple_ip",
+        "tag": "amazon_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "apple_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bahamut_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bahamut.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bilibili_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bilibili.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
         "download_detour": "direct"
       },
       {
@@ -238,17 +203,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "netflix_ip",
+        "tag": "spotify_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "netflix_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/netflix.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
         "download_detour": "direct"
       },
       {
@@ -292,6 +250,14 @@
   },
   "outbounds": [
     {
+      "tag": "fiddler",
+      "type": "selector",
+      "outbounds": [
+        "direct"
+      ],
+      "default": "direct"
+    },
+    {
       "tag": "proxy",
       "type": "selector",
       "outbounds": [
@@ -305,6 +271,8 @@
         "sg-auto",
         "us",
         "us-auto",
+        "kr",
+        "kr-auto",
         "all",
         "all-auto",
         "direct"
@@ -325,33 +293,14 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
         "all-auto"
       ],
       "default": "proxy"
-    },
-    {
-      "tag": "apple",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
     },
     {
       "tag": "telegram",
@@ -367,6 +316,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -375,7 +326,7 @@
       "default": "proxy"
     },
     {
-      "tag": "bilibili",
+      "tag": "spotify",
       "type": "selector",
       "outbounds": [
         "proxy",
@@ -388,27 +339,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
-    },
-    {
-      "tag": "netflix",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -417,7 +349,7 @@
       "default": "proxy"
     },
     {
-      "tag": "bahamut",
+      "tag": "amazon",
       "type": "selector",
       "outbounds": [
         "proxy",
@@ -430,6 +362,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -451,6 +385,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -472,6 +408,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -493,6 +431,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -514,6 +454,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -538,6 +480,11 @@
     },
     {
       "tag": "sg",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "kr",
       "type": "selector",
       "outbounds": []
     },
@@ -584,6 +531,14 @@
       "tolerance": 50
     },
     {
+      "tag": "kr-auto",
+      "type": "urltest",
+      "outbounds": [],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
       "tag": "us-auto",
       "type": "urltest",
       "outbounds": [],
@@ -605,6 +560,7 @@
       "outbounds": [
         "direct",
         "proxy",
+        "fiddler",
         "hk",
         "hk-auto",
         "tw",
@@ -613,6 +569,8 @@
         "jp-auto",
         "sg",
         "sg-auto",
+        "kr",
+        "kr-auto",
         "us",
         "us-auto",
         "all",
@@ -662,7 +620,7 @@
   },
   "log": {
     "disabled": false,
-    "level": "info",
+    "level": "warn",
     "timestamp": true
   }
 }

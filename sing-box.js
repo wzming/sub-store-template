@@ -12,6 +12,7 @@ let proxies = await produceArtifact({
   platform: 'sing-box',
   produceType: 'internal',
 })
+console.log("文件信息",JSON.stringify(config))
 
 config.outbounds.push(...proxies)
 
@@ -31,8 +32,14 @@ config.outbounds.map(i => {
   if (['sg', 'sg-auto'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:us)).*(新|sg|singapore|🇸🇬)/i))
   }
+  if (['kr', 'kr-auto'].includes(i.tag)) {
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:kr)).*(KR|Korea|KOR|首尔|韩|韓|🇰🇷)/i))
+  }
   if (['us', 'us-auto'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
+  }
+  if (['fiddler'].includes(i.tag)) {
+    i.outbounds.push(...getTags(proxies, /fiddler/i))
   }
 })
 

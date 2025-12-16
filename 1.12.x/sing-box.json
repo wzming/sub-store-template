@@ -3,13 +3,13 @@
     "servers": [
       {
         "tag": "google",
-        "type": "tls",
+        "type": "https",
         "server": "8.8.8.8",
         "detour": "proxy"
       },
       {
         "tag": "ali",
-        "type": "udp",
+        "type": "https",
         "server": "223.5.5.5"
       },
       {

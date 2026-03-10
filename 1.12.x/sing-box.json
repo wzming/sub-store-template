@@ -116,6 +116,11 @@
         "outbound": "openai"
       },
       {
+        "rule_set": "cloudflare_domain",
+        "action": "route",
+        "outbound": "cloudflare"
+      },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
@@ -131,6 +136,7 @@
               "spotify_domain",
               "youtube_domain",
               "openai_domain",
+              "cloudflare_domain",
               "amazon_domain"
             ]
           }
@@ -242,6 +248,13 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "cloudflare_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/cloudflare.srs",
         "download_detour": "direct"
       }
     ],
@@ -396,6 +409,29 @@
     },
     {
       "tag": "openai",
+      "type": "selector",
+      "outbounds": [
+        "proxy",
+        "direct",
+        "hk",
+        "hk-auto",
+        "tw",
+        "tw-auto",
+        "jp",
+        "jp-auto",
+        "sg",
+        "sg-auto",
+        "kr",
+        "kr-auto",
+        "us",
+        "us-auto",
+        "all",
+        "all-auto"
+      ],
+      "default": "proxy"
+    },
+    {
+      "tag": "cloudflare",
       "type": "selector",
       "outbounds": [
         "proxy",

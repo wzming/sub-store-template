@@ -290,7 +290,7 @@
         "all-auto",
         "direct"
       ],
-      "default": "all-auto"
+      "default": "us-auto"
     },
     {
       "tag": "google",
@@ -336,7 +336,7 @@
         "all",
         "all-auto"
       ],
-      "default": "proxy"
+      "default": "sg-auto"
     },
     {
       "tag": "spotify",
@@ -497,7 +497,7 @@
         "all",
         "all-auto"
       ],
-      "default": "proxy"
+      "default": "sg-auto"
     },
     {
       "tag": "hk",
@@ -612,7 +612,7 @@
         "all",
         "all-auto"
       ],
-      "default": "direct"
+      "default": "sg-auto"
     },
     {
       "tag": "direct",
@@ -627,14 +627,7 @@
         "fdfe:dcba:9876::0/126"
       ],
       "stack": "mixed",
-      "auto_route": true,
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 7890
-        }
-      }
+      "auto_route": true
     },
     {
       "type": "mixed",

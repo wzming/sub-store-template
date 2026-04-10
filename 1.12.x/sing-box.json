@@ -359,7 +359,7 @@
         "all",
         "all-auto"
       ],
-      "default": "proxy"
+      "default": "hk-auto"
     },
     {
       "tag": "amazon",

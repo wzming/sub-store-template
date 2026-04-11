@@ -301,6 +301,7 @@
         "kr-auto",
         "all",
         "all-auto",
+        "other-auto",
         "direct"
       ],
       "default": "us-auto"
@@ -324,7 +325,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "proxy"
     },
@@ -347,7 +349,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "sg-auto"
     },
@@ -370,7 +373,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "hk-auto"
     },
@@ -393,7 +397,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "proxy"
     },
@@ -416,7 +421,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "proxy"
     },
@@ -439,7 +445,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "proxy"
     },
@@ -462,7 +469,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "proxy"
     },
@@ -485,9 +493,10 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
-      "default": "hk-auto"
+      "default": "other-auto"
     },
     {
       "tag": "cn",
@@ -508,7 +517,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "direct"
     },
@@ -531,7 +541,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "sg-auto"
     },
@@ -654,7 +665,8 @@
         "us",
         "us-auto",
         "all",
-        "all-auto"
+        "all-auto",
+        "other-auto"
       ],
       "default": "sg-auto"
     },

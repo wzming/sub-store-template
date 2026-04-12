@@ -192,8 +192,7 @@
         "outbound": "proxy"
       },
       {
-        "action": "resolve",
-        "server": "google"
+        "action": "resolve"
       },
       {
         "rule_set": [
@@ -222,20 +221,6 @@
     ],
     "rule_set": [
       {
-        "tag": "amazon_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "ads_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "cn_ip",
         "type": "remote",
         "format": "binary",
@@ -250,6 +235,13 @@
         "download_detour": "direct"
       },
       {
+        "tag": "ads_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "private_ip",
         "type": "remote",
         "format": "binary",
@@ -261,6 +253,13 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "amazon_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
         "download_detour": "direct"
       },
       {
@@ -814,14 +813,36 @@
   ],
   "inbounds": [
     {
-      "type": "tproxy",
-      "listen": "::",
-      "listen_port": 1536
-    },
-    {
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 7890
+      "type": "tun",
+      "interface_name": "tun0",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "mtu": 1500,
+      "auto_route": true,
+      "iproute2_table_index": 2022,
+      "iproute2_rule_index": 9000,
+      "auto_redirect": true,
+      "exclude_mptcp": true,
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.168.0.0/16",
+        "224.0.0.0/4",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "route_exclude_address_set": [
+        "cn_ip"
+      ],
+      "strict_route": true,
+      "endpoint_independent_nat": false,
+      "stack": "mixed"
     }
   ],
   "experimental": {

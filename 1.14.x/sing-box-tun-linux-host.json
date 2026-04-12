@@ -13,6 +13,10 @@
         "server": "223.5.5.5"
       },
       {
+        "tag": "local",
+        "type": "local"
+      },
+      {
         "tag": "fakeip",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
@@ -27,12 +31,17 @@
       {
         "clash_mode": "Direct",
         "action": "route",
-        "server": "ali"
+        "server": "local"
       },
       {
         "clash_mode": "Global",
         "action": "route",
         "server": "fakeip"
+      },
+      {
+        "rule_set": "private_domain",
+        "action": "route",
+        "server": "local"
       },
       {
         "rule_set": "cn_domain",
@@ -49,8 +58,8 @@
         "rewrite_ttl": 1
       }
     ],
-    "final": "google",
-    "independent_cache": true
+    "optimistic": true,
+    "final": "google"
   },
   "route": {
     "default_domain_resolver": {
@@ -79,6 +88,20 @@
           }
         ],
         "action": "hijack-dns"
+      },
+      {
+        "rule_set": [
+          "private_domain",
+          "private_ip"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      },
+      {
+        "action": "reject",
+        "rule_set": [
+          "ads_domain"
+        ]
       },
       {
         "ip_is_private": true,
@@ -126,6 +149,21 @@
         "outbound": "cloudflare"
       },
       {
+        "rule_set": "claude_domain",
+        "action": "route",
+        "outbound": "openai"
+      },
+      {
+        "rule_set": "gemini_domain",
+        "action": "route",
+        "outbound": "openai"
+      },
+      {
+        "rule_set": "github_domain",
+        "action": "route",
+        "outbound": "github"
+      },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
@@ -141,6 +179,9 @@
               "spotify_domain",
               "youtube_domain",
               "openai_domain",
+              "claude_domain",
+              "gemini_domain",
+              "github_domain",
               "cloudflare_domain",
               "docker_domain",
               "amazon_domain"
@@ -180,13 +221,6 @@
     ],
     "rule_set": [
       {
-        "tag": "amazon_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "cn_ip",
         "type": "remote",
         "format": "binary",
@@ -198,6 +232,34 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "ads_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "private_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/private.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "private_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "amazon_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
         "download_detour": "direct"
       },
       {
@@ -226,6 +288,27 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "claude_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "gemini_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "github_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/github.srs",
         "download_detour": "direct"
       },
       {
@@ -278,6 +361,7 @@
     {
       "tag": "fiddler",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "direct"
       ],
@@ -286,6 +370,7 @@
     {
       "tag": "proxy",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "hk",
         "hk-auto",
@@ -309,6 +394,7 @@
     {
       "tag": "google",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -333,6 +419,7 @@
     {
       "tag": "telegram",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -357,6 +444,7 @@
     {
       "tag": "spotify",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -381,6 +469,7 @@
     {
       "tag": "amazon",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -405,6 +494,7 @@
     {
       "tag": "youtube",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -429,6 +519,7 @@
     {
       "tag": "openai",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -453,6 +544,7 @@
     {
       "tag": "cloudflare",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -477,6 +569,7 @@
     {
       "tag": "docker",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -499,8 +592,34 @@
       "default": "other-auto"
     },
     {
+      "tag": "github",
+      "type": "selector",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "proxy",
+        "direct",
+        "hk",
+        "hk-auto",
+        "tw",
+        "tw-auto",
+        "jp",
+        "jp-auto",
+        "sg",
+        "sg-auto",
+        "kr",
+        "kr-auto",
+        "us",
+        "us-auto",
+        "all",
+        "all-auto",
+        "other-auto"
+      ],
+      "default": "sg-auto"
+    },
+    {
       "tag": "cn",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -525,6 +644,7 @@
     {
       "tag": "final",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -549,41 +669,49 @@
     {
       "tag": "hk",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "tw",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "jp",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "sg",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "kr",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "us",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "all",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "hk-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -592,6 +720,7 @@
     {
       "tag": "tw-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -600,6 +729,7 @@
     {
       "tag": "jp-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -608,6 +738,7 @@
     {
       "tag": "sg-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -616,6 +747,7 @@
     {
       "tag": "kr-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -624,6 +756,7 @@
     {
       "tag": "us-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -632,6 +765,7 @@
     {
       "tag": "all-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -640,6 +774,7 @@
     {
       "tag": "other-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -648,6 +783,7 @@
     {
       "tag": "GLOBAL",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "direct",
         "proxy",
@@ -677,9 +813,42 @@
   ],
   "inbounds": [
     {
-      "type": "tproxy",
-      "listen": "::",
-      "listen_port": 1536
+      "type": "tun",
+      "interface_name": "tun0",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "mtu": 1500,
+      "auto_route": true,
+      "iproute2_table_index": 2022,
+      "iproute2_rule_index": 9000,
+      "auto_redirect": true,
+      "exclude_mptcp": true,
+      "exclude_interface": [
+        "podman0",
+        "virbr0",
+        "tailscale0",
+        "wg0"
+      ],
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.168.0.0/16",
+        "224.0.0.0/4",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "route_exclude_address_set": [
+        "cn_ip"
+      ],
+      "strict_route": true,
+      "endpoint_independent_nat": false,
+      "stack": "mixed"
     },
     {
       "type": "mixed",
@@ -690,6 +859,7 @@
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
+      "secret": "singbox123",
       "external_ui": "ui",
       "external_ui_download_url": "https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct"
@@ -697,6 +867,7 @@
     "cache_file": {
       "enabled": true,
       "store_fakeip": true,
+      "store_dns": true,
       "path": "cache.db"
     }
   },

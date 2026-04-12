@@ -58,8 +58,8 @@
         "rewrite_ttl": 1
       }
     ],
-    "final": "google",
-    "independent_cache": true
+    "optimistic": true,
+    "final": "google"
   },
   "route": {
     "default_domain_resolver": {
@@ -835,6 +835,7 @@
     "cache_file": {
       "enabled": true,
       "store_fakeip": true,
+      "store_dns": true,
       "path": "cache.db"
     }
   },

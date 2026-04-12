@@ -13,6 +13,10 @@
         "server": "223.5.5.5"
       },
       {
+        "tag": "local",
+        "type": "local"
+      },
+      {
         "tag": "fakeip",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
@@ -27,12 +31,17 @@
       {
         "clash_mode": "Direct",
         "action": "route",
-        "server": "ali"
+        "server": "local"
       },
       {
         "clash_mode": "Global",
         "action": "route",
         "server": "fakeip"
+      },
+      {
+        "rule_set": "private_domain",
+        "action": "route",
+        "server": "local"
       },
       {
         "rule_set": "cn_domain",
@@ -49,8 +58,8 @@
         "rewrite_ttl": 1
       }
     ],
-    "final": "google",
-    "independent_cache": true
+    "optimistic": true,
+    "final": "google"
   },
   "route": {
     "default_domain_resolver": {
@@ -81,19 +90,23 @@
         "action": "hijack-dns"
       },
       {
-        "ip_is_private": true,
+        "rule_set": [
+          "private_domain",
+          "private_ip"
+        ],
         "action": "route",
         "outbound": "direct"
-      },
-      {
-        "action": "reject",
-        "protocol": "quic"
       },
       {
         "action": "reject",
         "rule_set": [
           "ads_domain"
         ]
+      },
+      {
+        "ip_is_private": true,
+        "action": "route",
+        "outbound": "direct"
       },
       {
         "clash_mode": "Global",
@@ -231,15 +244,15 @@
       {
         "tag": "private_ip",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/private.srs",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/private.srs",
         "download_detour": "direct"
       },
       {
         "tag": "private_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
         "download_detour": "direct"
       },
       {
@@ -280,22 +293,22 @@
       {
         "tag": "claude_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
         "download_detour": "direct"
       },
       {
         "tag": "gemini_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
         "download_detour": "direct"
       },
       {
         "tag": "github_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/github.srs",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/github.srs",
         "download_detour": "direct"
       },
       {
@@ -348,6 +361,7 @@
     {
       "tag": "fiddler",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "direct"
       ],
@@ -356,6 +370,7 @@
     {
       "tag": "proxy",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "hk",
         "hk-auto",
@@ -379,6 +394,7 @@
     {
       "tag": "google",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -403,6 +419,7 @@
     {
       "tag": "telegram",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -427,6 +444,7 @@
     {
       "tag": "spotify",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -451,6 +469,7 @@
     {
       "tag": "amazon",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -475,6 +494,7 @@
     {
       "tag": "youtube",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -499,6 +519,7 @@
     {
       "tag": "openai",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -523,6 +544,7 @@
     {
       "tag": "cloudflare",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -547,6 +569,7 @@
     {
       "tag": "docker",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -571,6 +594,7 @@
     {
       "tag": "github",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -595,6 +619,7 @@
     {
       "tag": "cn",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -619,6 +644,7 @@
     {
       "tag": "final",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "proxy",
         "direct",
@@ -643,41 +669,49 @@
     {
       "tag": "hk",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "tw",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "jp",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "sg",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "kr",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "us",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "all",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "hk-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -686,6 +720,7 @@
     {
       "tag": "tw-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -694,6 +729,7 @@
     {
       "tag": "jp-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -702,6 +738,7 @@
     {
       "tag": "sg-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -710,6 +747,7 @@
     {
       "tag": "kr-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -718,6 +756,7 @@
     {
       "tag": "us-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -726,6 +765,7 @@
     {
       "tag": "all-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -734,6 +774,7 @@
     {
       "tag": "other-auto",
       "type": "urltest",
+      "interrupt_exist_connections": true,
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -742,6 +783,7 @@
     {
       "tag": "GLOBAL",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "direct",
         "proxy",
@@ -772,25 +814,41 @@
   "inbounds": [
     {
       "type": "tun",
-      "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "interface_name": "tun0",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "mtu": 1500,
       "auto_route": true,
-      "route_exclude_address": ["10.0.0.0/8", "100.64.0.0/10", "169.254.0.0/16", "172.16.0.0/12", "192.0.0.0/24", "192.168.0.0/16"],
-      "route_exclude_address_set": ["cn_ip"],
+      "iproute2_table_index": 2022,
+      "iproute2_rule_index": 9000,
+      "auto_redirect": true,
+      "exclude_mptcp": true,
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.168.0.0/16",
+        "224.0.0.0/4",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "route_exclude_address_set": [
+        "cn_ip"
+      ],
       "strict_route": true,
       "endpoint_independent_nat": false,
-      "stack": "mixed",
-      "auto_redirect": true
-    },
-    {
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 7890
+      "stack": "mixed"
     }
   ],
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
+      "secret": "singbox123",
       "external_ui": "ui",
       "external_ui_download_url": "https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct"
@@ -798,6 +856,7 @@
     "cache_file": {
       "enabled": true,
       "store_fakeip": true,
+      "store_dns": true,
       "path": "cache.db"
     }
   },

@@ -192,8 +192,7 @@
         "outbound": "proxy"
       },
       {
-        "action": "resolve",
-        "server": "google"
+        "action": "resolve"
       },
       {
         "rule_set": [
@@ -222,20 +221,6 @@
     ],
     "rule_set": [
       {
-        "tag": "amazon_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "ads_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "cn_ip",
         "type": "remote",
         "format": "binary",
@@ -250,17 +235,31 @@
         "download_detour": "direct"
       },
       {
-        "tag": "private_ip",
+        "tag": "ads_domain",
         "type": "remote",
         "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "private_ip",
+        "type": "remote",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/private.srs",
+        "format": "binary",
         "download_detour": "direct"
       },
       {
         "tag": "private_domain",
         "type": "remote",
-        "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "format": "binary",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "amazon_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/amazon.srs",
         "download_detour": "direct"
       },
       {
@@ -294,22 +293,22 @@
       {
         "tag": "claude_domain",
         "type": "remote",
-        "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "format": "binary",
         "download_detour": "direct"
       },
       {
         "tag": "gemini_domain",
         "type": "remote",
-        "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "format": "binary",
         "download_detour": "direct"
       },
       {
         "tag": "github_domain",
         "type": "remote",
-        "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/github.srs",
+        "format": "binary",
         "download_detour": "direct"
       },
       {
@@ -814,9 +813,28 @@
   ],
   "inbounds": [
     {
-      "type": "tproxy",
-      "listen": "::",
-      "listen_port": 1536
+      "type": "tun",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "mtu": 1500,
+      "auto_route": true,
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.168.0.0/16",
+        "224.0.0.0/4",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "endpoint_independent_nat": false,
+      "stack": "mixed",
+      "auto_redirect": true
     },
     {
       "type": "mixed",
@@ -826,8 +844,7 @@
   ],
   "experimental": {
     "clash_api": {
-      "external_controller": "0.0.0.0:9090",
-      "secret": "singbox123",
+      "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "external_ui_download_url": "https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct"

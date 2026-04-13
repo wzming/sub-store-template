@@ -13,10 +13,6 @@
         "server": "223.5.5.5"
       },
       {
-        "tag": "local",
-        "type": "local"
-      },
-      {
         "tag": "fakeip",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
@@ -31,17 +27,12 @@
       {
         "clash_mode": "Direct",
         "action": "route",
-        "server": "local"
+        "server": "ali"
       },
       {
         "clash_mode": "Global",
         "action": "route",
         "server": "fakeip"
-      },
-      {
-        "rule_set": "private_domain",
-        "action": "route",
-        "server": "local"
       },
       {
         "rule_set": "cn_domain",
@@ -88,14 +79,6 @@
           }
         ],
         "action": "hijack-dns"
-      },
-      {
-        "rule_set": [
-          "private_domain",
-          "private_ip"
-        ],
-        "action": "route",
-        "outbound": "direct"
       },
       {
         "action": "reject",
@@ -239,20 +222,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "private_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/private.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "private_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
         "download_detour": "direct"
       },
       {
@@ -853,7 +822,7 @@
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "secret": "singbox123",
+      "secret": "",
       "external_ui": "ui",
       "external_ui_download_url": "https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct"

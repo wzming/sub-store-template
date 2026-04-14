@@ -34,3 +34,6 @@
 - 本目录现在只保留 5 类配置模板：`tproxy`、`android`、`linux-host`、`openwrt-main-router`、`openwrt-bypass-router`。
 - `sing-box.js` 为这些模板共用的生成脚本，保留在目录内。
 - `sing-box-tproxy.json` 更偏向 Linux / Root Android 的 TPROXY 模式使用；如果 box4magisk 最终回退到 REDIRECT 模式，则通常还需要额外对齐其脚本侧的 DNS 劫持配置。
+- `linux-host` 与两种 `openwrt` 模板中的 `route_exclude_address` 仅保留链路本地与组播网段：`169.254.0.0/16`、`224.0.0.0/4`、`fe80::/10`、`ff00::/8`。
+- 不再在 `route_exclude_address` 中排除整段 RFC1918 / ULA 私网，避免与模板固定的 TUN 地址 `172.18.0.1/30`、`fdfe:dcba:9876::1/126` 发生范围重叠，在 Linux / OpenWrt 的 `auto_route` 与 `auto_redirect` 场景下引发路由异常。
+- 私网流量仍通过模板内已有的 `ip_is_private -> direct` 规则处理，而不是在路由下发阶段直接整体绕过。

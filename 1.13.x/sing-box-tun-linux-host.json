@@ -800,12 +800,6 @@
         "tailscale0",
         "wg0"
       ],
-      "route_exclude_address": [
-        "169.254.0.0/16",
-        "224.0.0.0/4",
-        "fe80::/10",
-        "ff00::/8"
-      ],
       "route_exclude_address_set": [
         "cn_ip"
       ],

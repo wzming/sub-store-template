@@ -359,7 +359,7 @@
         "other-auto",
         "direct"
       ],
-      "default": "us-auto"
+      "default": "sg-auto"
     },
     {
       "tag": "google",
@@ -384,7 +384,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "proxy"
+      "default": "us"
     },
     {
       "tag": "telegram",
@@ -459,7 +459,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "proxy"
+      "default": "hk-auto"
     },
     {
       "tag": "youtube",
@@ -484,7 +484,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "proxy"
+      "default": "us"
     },
     {
       "tag": "openai",
@@ -509,7 +509,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "proxy"
+      "default": "us"
     },
     {
       "tag": "cloudflare",
@@ -534,7 +534,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "proxy"
+      "default": "us"
     },
     {
       "tag": "docker",

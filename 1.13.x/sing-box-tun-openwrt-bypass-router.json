@@ -40,6 +40,14 @@
         "server": "ali"
       },
       {
+        "domain_suffix": [
+          "cftunnel.com",
+          "argotunnel.com"
+        ],
+        "action": "route",
+        "server": "ali"
+      },
+      {
         "query_type": [
           "A",
           "AAAA"
@@ -125,6 +133,14 @@
         "rule_set": "docker_domain",
         "action": "route",
         "outbound": "docker"
+      },
+      {
+        "domain_suffix": [
+          "cftunnel.com",
+          "argotunnel.com"
+        ],
+        "action": "route",
+        "outbound": "direct"
       },
       {
         "rule_set": "cloudflare_domain",

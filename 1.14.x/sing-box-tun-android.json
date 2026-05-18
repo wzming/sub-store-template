@@ -788,6 +788,7 @@
         "fdfe:dcba:9876::1/126"
       ],
       "mtu": 1500,
+      "dns_mode": "hijack",
       "auto_route": true,
       "endpoint_independent_nat": false,
       "stack": "mixed",

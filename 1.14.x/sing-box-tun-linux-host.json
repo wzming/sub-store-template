@@ -805,6 +805,7 @@
         "fdfe:dcba:9876::1/126"
       ],
       "mtu": 1500,
+      "dns_mode": "hijack",
       "auto_route": true,
       "iproute2_table_index": 2022,
       "iproute2_rule_index": 9000,

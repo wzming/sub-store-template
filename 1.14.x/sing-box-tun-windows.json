@@ -799,7 +799,7 @@
   "inbounds": [
     {
       "type": "tun",
-      "interface_name": "tun0",
+      "interface_name": "sing-box",
       "address": [
         "172.18.0.1/30",
         "fdfe:dcba:9876::1/126"
@@ -807,16 +807,25 @@
       "mtu": 1500,
       "dns_mode": "hijack",
       "auto_route": true,
-      "iproute2_table_index": 2022,
-      "iproute2_rule_index": 9000,
-      "auto_redirect": true,
-      "exclude_mptcp": true,
+      "exclude_interface": [
+        "Tailscale",
+        "ZeroTier One",
+        "VMware Network Adapter VMnet1",
+        "VMware Network Adapter VMnet8",
+        "vEthernet (Default Switch)",
+        "vEthernet (WSL)"
+      ],
       "route_exclude_address_set": [
         "cn_ip"
       ],
       "strict_route": true,
       "endpoint_independent_nat": false,
       "stack": "mixed"
+    },
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 7890
     }
   ],
   "experimental": {

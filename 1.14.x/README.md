@@ -13,6 +13,9 @@
 - `sing-box-tun-linux-host.json`
   Linux 桌面或服务器模板。包含偏 Linux 的 TUN 选项，并排除了常见虚拟网卡，Docker 除外。
 
+- `sing-box-tun-windows.json`
+  Windows 桌面模板。沿用 Linux 主机版的 DNS、分流和出站分组，TUN 入站移除 Linux 专属选项，并排除常见 Windows 虚拟网卡。
+
 - `sing-box-tun-openwrt-main-router.json`
   OpenWrt 主路由模板。采用纯透明代理模式，不开放对外可用的 `mixed` 入站。
 
@@ -27,11 +30,12 @@
 - 已移除废弃的 `dns.independent_cache`
 - 已启用 `dns.optimistic`
 - 已启用 `experimental.cache_file.store_dns`
+- TUN 模板已显式设置 `dns_mode: hijack`，对齐 1.14 的 TUN DNS 行为
 - 保留 `experimental.cache_file.store_fakeip`
 
 ## 备注
 
-- 本目录现在只保留 5 类配置模板：`tproxy`、`android`、`linux-host`、`openwrt-main-router`、`openwrt-bypass-router`。
+- 本目录现在只保留 6 类配置模板：`tproxy`、`android`、`linux-host`、`windows`、`openwrt-main-router`、`openwrt-bypass-router`。
 - `sing-box.js` 为这些模板共用的生成脚本，保留在目录内。
 - `sing-box-tproxy.json` 更偏向 Linux / Root Android 的 TPROXY 模式使用；如果 box4magisk 最终回退到 REDIRECT 模式，则通常还需要额外对齐其脚本侧的 DNS 劫持配置。
 - 私网流量仍通过模板内已有的 `ip_is_private -> direct` 规则处理。

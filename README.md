@@ -10,6 +10,7 @@
 - `sing-box-tproxy.json`
 - `sing-box-tun-android.json`
 - `sing-box-tun-linux-host.json`
+- `sing-box-tun-windows.json`
 - `sing-box-tun-openwrt-main-router.json`
 - `sing-box-tun-openwrt-bypass-router.json`
 - `sing-box.js`

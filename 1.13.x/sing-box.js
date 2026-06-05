@@ -10,6 +10,7 @@ const groupRegexMap = {
   sg: /新加坡|狮城|(?:^|[^a-z])sg(?:$|[^a-z])|singapore|🇸🇬/i,
   kr: /首尔|韩|韓|(?:^|[^a-z])(?:kr|kor)(?:$|[^a-z])|korea|🇰🇷/i,
   us: /美国|美|(?:^|[^a-z])(?:us|usa)(?:$|[^a-z])|united[\s_-]*states?|america|🇺🇸/i,
+  uk: /英国|英|伦敦|(?:^|[^a-z])(?:uk|gb|gbr)(?:$|[^a-z])|united[\s_-]*kingdom|great[\s_-]*britain|britain|england|london|🇬🇧/i,
   fiddler: /fiddler/i,
 }
 const otherAutoRegexList = Object.values(groupRegexMap)
@@ -47,6 +48,9 @@ config.outbounds.map(i => {
   }
   if (['us', 'us-auto'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, groupRegexMap.us))
+  }
+  if (['uk', 'uk-auto'].includes(i.tag)) {
+    i.outbounds.push(...getTags(proxies, groupRegexMap.uk))
   }
   if (['fiddler'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, groupRegexMap.fiddler))

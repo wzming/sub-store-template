@@ -368,6 +368,8 @@
         "sg-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "kr",
         "kr-auto",
         "all",
@@ -396,6 +398,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -421,6 +425,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -446,6 +452,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -471,6 +479,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -496,6 +506,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -521,6 +533,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -546,6 +560,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -571,6 +587,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -596,6 +614,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -621,6 +641,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -646,6 +668,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"
@@ -684,6 +708,12 @@
     },
     {
       "tag": "us",
+      "type": "selector",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "tag": "uk",
       "type": "selector",
       "interrupt_exist_connections": true,
       "outbounds": []
@@ -749,6 +779,15 @@
       "tolerance": 50
     },
     {
+      "tag": "uk-auto",
+      "type": "urltest",
+      "interrupt_exist_connections": true,
+      "outbounds": [],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
       "tag": "all-auto",
       "type": "urltest",
       "interrupt_exist_connections": true,
@@ -786,6 +825,8 @@
         "kr-auto",
         "us",
         "us-auto",
+        "uk",
+        "uk-auto",
         "all",
         "all-auto",
         "other-auto"

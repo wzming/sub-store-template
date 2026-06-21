@@ -658,7 +658,7 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "sg-auto"
+      "default": "proxy"
     },
     {
       "tag": "hk",

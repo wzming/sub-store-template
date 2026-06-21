@@ -32,7 +32,7 @@
 - 已启用 `experimental.cache_file.store_dns`
 - TUN 模板已显式设置 `dns_mode: hijack`，对齐 1.14 的 TUN DNS 行为
 - 保留 `experimental.cache_file.store_fakeip`
-- 远程规则集已从废弃的 `download_detour` 迁移到 `http_client`，并显式配置 `http_clients` 与 `route.default_http_client`，保持规则集通过 `direct` 下载
+- 远程规则集已从废弃的 `download_detour` 迁移到 `http_client`，并显式配置 `http_clients` 与 `route.default_http_client`，使用 jsDelivr GitHub CDN 且通过 `direct` 下载
 
 ## 备注
 

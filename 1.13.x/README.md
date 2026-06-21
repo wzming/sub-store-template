@@ -31,6 +31,7 @@
 - 保留 `experimental.cache_file.store_fakeip`
 - 不使用 1.14 新增的 `dns.optimistic`
 - 不使用 1.14 新增的 `experimental.cache_file.store_dns`
+- 远程规则集使用 jsDelivr GitHub CDN，并通过 `download_detour: direct` 直连下载，避免规则集更新依赖代理链
 
 ## 备注
 

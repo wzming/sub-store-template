@@ -158,12 +158,17 @@
         "outbound": "openai"
       },
       {
-        "rule_set": "github_domain",
-        "action": "route",
-        "outbound": "github"
+       "rule_set": "github_domain",
+       "action": "route",
+       "outbound": "github"
       },
       {
-        "type": "logical",
+        "rule_set": "whatsapp_domain",
+        "action": "route",
+        "outbound": "whatsapp"
+      },
+      {
+       "type": "logical",
         "mode": "and",
         "rules": [
           {
@@ -183,6 +188,7 @@
               "github_domain",
               "cloudflare_domain",
               "docker_domain",
+              "whatsapp_domain",
               "amazon_domain"
             ]
           }
@@ -332,10 +338,17 @@
         "download_detour": "direct"
       },
       {
-        "tag": "cloudflare_domain",
+       "tag": "cloudflare_domain",
         "type": "remote",
         "format": "binary",
         "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geosite/cloudflare.srs",
+       "download_detour": "direct"
+      },
+      {
+        "tag": "whatsapp_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/whatsapp.srs",
         "download_detour": "direct"
       }
     ],
@@ -594,8 +607,8 @@
       ],
       "default": "other-auto"
     },
-    {
-      "tag": "github",
+      {
+       "tag": "github",
       "type": "selector",
       "interrupt_exist_connections": true,
       "outbounds": [
@@ -619,10 +632,37 @@
         "all-auto",
         "other-auto"
       ],
-      "default": "sg-auto"
-    },
-    {
-      "tag": "cn",
+       "default": "sg-auto"
+      },
+      {
+        "tag": "whatsapp",
+        "type": "selector",
+        "interrupt_exist_connections": true,
+        "outbounds": [
+          "proxy",
+          "direct",
+          "hk",
+          "hk-auto",
+          "tw",
+          "tw-auto",
+          "jp",
+          "jp-auto",
+          "sg",
+          "sg-auto",
+          "kr",
+          "kr-auto",
+          "us",
+          "us-auto",
+          "uk",
+          "uk-auto",
+          "all",
+          "all-auto",
+          "other-auto"
+        ],
+        "default": "sg-auto"
+      },
+      {
+       "tag": "cn",
       "type": "selector",
       "interrupt_exist_connections": true,
       "outbounds": [
